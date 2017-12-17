@@ -17,6 +17,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post "/signup" do
+		# raise params[:username].inspect   #=> do this to see the value, kinda line binding.pry
 		user = User.new(:username => params[:username], :password => params[:password])
 
 		if user.save
@@ -51,7 +52,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get "/failure" do
-		erb :failure
+		erb :failure, :layout => :alternative
 	end
 
 	get "/logout" do
@@ -61,6 +62,7 @@ class ApplicationController < Sinatra::Base
 
 	helpers do
 		def logged_in?
+	#		binding.pry
 			!!session[:user_id]
 		end
 
